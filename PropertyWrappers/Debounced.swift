@@ -1,5 +1,5 @@
 //
-//  Debouncer.swift
+//  Debounced.swift
 //  PropertyWrappers
 //
 //  Created by Petro Korienev on 2/9/20.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-public class Debouncer<T> {
+@propertyWrapper
+public class Debounced<T> {
     private(set) var value: T?
     private var valueTimestamp: Date = Date()
     private var interval: TimeInterval
@@ -17,7 +18,7 @@ public class Debouncer<T> {
     private var debounceWorkItem: DispatchWorkItem = DispatchWorkItem {}
     
     public init(_ interval: TimeInterval,
-         on queue: DispatchQueue = .main) {
+                on queue: DispatchQueue = .main) {
         self.interval = interval
         self.queue = queue
     }
@@ -43,5 +44,10 @@ public class Debouncer<T> {
     }
     private func sendValue() {
         if let value = self.value { callbacks.forEach { $0(value) } }
+    }
+    
+    public var wrappedValue: T? {
+        get { value }
+        set(v) { if let v = v { receive(v) } }
     }
 }
