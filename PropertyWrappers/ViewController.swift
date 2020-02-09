@@ -9,18 +9,24 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private(set) var data: [GithubAPI.Response.Model] = []
-    private(set) var searchTerm: String = ""
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var searchField: UITextField!
     @IBOutlet private var errorLabel: UILabel!
     
-    private var valueTimestamp: Date? = nil
-    private let interval: TimeInterval = 1.5
+    private(set) var data: [GithubAPI.Response.Model] = []
+    private(set) var searchTermThrottle = Throttler<String>(1.5)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
+        searchTermThrottle.on { (searchTerm) in
+            GithubAPI.search(term: searchTerm) { [weak self] result in
+                switch (result) {
+                case .success(let models): self?.onSuccess(models)
+                case .failure(let error): self?.onError(error)
+                }
+            }
+        }
     }
 }
 
@@ -44,24 +50,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension ViewController {
     @objc func textDidChange(_ sender: UITextField) {
-        searchTerm = sender.text ?? ""
-        if let valueTimestamp = valueTimestamp {
-            if Date().timeIntervalSince(valueTimestamp) > interval {
-                self.valueTimestamp = nil
-                GithubAPI.search(term: searchTerm) { [weak self] result in
-                    switch (result) {
-                    case .success(let models): self?.onSuccess(models)
-                    case .failure(let error): self?.onError(error)
-                    }
-                }
-            }
-        } else {
-            self.valueTimestamp = Date()
-            DispatchQueue.main.asyncAfter(deadline: .now() + interval) { [weak self] in
-                guard let self = self else { return }
-                self.textDidChange(self.searchField)
-            }
-        }
+        searchTermThrottle.receive(sender.text ?? "")
     }
     private func onSuccess(_ models: [GithubAPI.Response.Model]) {
         DispatchQueue.main.async {
