@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet private var searchField: UITextField!
     @IBOutlet private var errorLabel: UILabel!
     
+    private var valueTimestamp: Date? = nil
+    private let interval: TimeInterval = 1.5
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
@@ -42,10 +45,21 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 extension ViewController {
     @objc func textDidChange(_ sender: UITextField) {
         searchTerm = sender.text ?? ""
-        GithubAPI.search(term: searchTerm) { [weak self] result in
-            switch (result) {
-            case .success(let models): self?.onSuccess(models)
-            case .failure(let error): self?.onError(error)
+        if let valueTimestamp = valueTimestamp {
+            if Date().timeIntervalSince(valueTimestamp) > interval {
+                self.valueTimestamp = nil
+                GithubAPI.search(term: searchTerm) { [weak self] result in
+                    switch (result) {
+                    case .success(let models): self?.onSuccess(models)
+                    case .failure(let error): self?.onError(error)
+                    }
+                }
+            }
+        } else {
+            self.valueTimestamp = Date()
+            DispatchQueue.main.asyncAfter(deadline: .now() + interval) { [weak self] in
+                guard let self = self else { return }
+                self.textDidChange(self.searchField)
             }
         }
     }
