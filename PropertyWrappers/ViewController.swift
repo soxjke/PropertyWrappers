@@ -14,12 +14,12 @@ class ViewController: UIViewController {
     @IBOutlet private var errorLabel: UILabel!
     
     private(set) var data: [GithubAPI.Response.Model] = []
-    private(set) var searchTermThrottle = Throttler<String>(1.5)
+    private(set) var searchTermDebounce = Debouncer<String>(0.5)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
-        searchTermThrottle.on { (searchTerm) in
+        searchTermDebounce.on { (searchTerm) in
             GithubAPI.search(term: searchTerm) { [weak self] result in
                 switch (result) {
                 case .success(let models): self?.onSuccess(models)
@@ -50,7 +50,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension ViewController {
     @objc func textDidChange(_ sender: UITextField) {
-        searchTermThrottle.receive(sender.text ?? "")
+        searchTermDebounce.receive(sender.text ?? "")
     }
     private func onSuccess(_ models: [GithubAPI.Response.Model]) {
         DispatchQueue.main.async {

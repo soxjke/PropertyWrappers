@@ -14,6 +14,7 @@ public class Throttler<T> {
     private var interval: TimeInterval
     private var queue: DispatchQueue
     private var callbacks: [(T) -> ()] = []
+    
     public init(_ interval: TimeInterval, on queue: DispatchQueue = .main) {
         self.interval = interval
         self.queue = queue
@@ -21,13 +22,16 @@ public class Throttler<T> {
     public func receive(_ value: T) {
         self.value = value
         guard valueTimestamp == nil else { return }
+        self.dispatchThrottle()
+    }
+    public func on(throttled: @escaping (T) -> ()) {
+        self.callbacks.append(throttled)
+    }
+    private func dispatchThrottle() {
         self.valueTimestamp = Date()
         queue.asyncAfter(deadline: .now() + interval) { [weak self] in
             self?.onDispatch()
         }
-    }
-    public func on(throttled: @escaping (T) -> ()) {
-        self.callbacks.append(throttled)
     }
     private func onDispatch() {
         self.valueTimestamp = nil

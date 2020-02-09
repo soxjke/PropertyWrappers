@@ -15,6 +15,7 @@
 		4B08D62E23F06E0F00A5CA7D /* GithubRepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08D62D23F06E0F00A5CA7D /* GithubRepoCell.swift */; };
 		4B08D63023F06E9400A5CA7D /* GithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08D62F23F06E9400A5CA7D /* GithubAPI.swift */; };
 		4B08D63423F08E7C00A5CA7D /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08D63323F08E7C00A5CA7D /* Throttler.swift */; };
+		4B08D63623F09A5D00A5CA7D /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08D63523F09A5D00A5CA7D /* Debouncer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		4B08D63123F07B1E00A5CA7D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4B08D63223F07B1E00A5CA7D /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4B08D63323F08E7C00A5CA7D /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
+		4B08D63523F09A5D00A5CA7D /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				4B08D61923F06D1400A5CA7D /* AppDelegate.swift */,
 				4B08D63323F08E7C00A5CA7D /* Throttler.swift */,
 				4B08D61D23F06D1400A5CA7D /* ViewController.swift */,
+				4B08D63523F09A5D00A5CA7D /* Debouncer.swift */,
 				4B08D62D23F06E0F00A5CA7D /* GithubRepoCell.swift */,
 				4B08D62F23F06E9400A5CA7D /* GithubAPI.swift */,
 				4B08D61F23F06D1400A5CA7D /* Main.storyboard */,
@@ -153,6 +156,7 @@
 				4B08D63023F06E9400A5CA7D /* GithubAPI.swift in Sources */,
 				4B08D61E23F06D1400A5CA7D /* ViewController.swift in Sources */,
 				4B08D61A23F06D1400A5CA7D /* AppDelegate.swift in Sources */,
+				4B08D63623F09A5D00A5CA7D /* Debouncer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
