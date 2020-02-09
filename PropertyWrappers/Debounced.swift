@@ -10,6 +10,25 @@ import Foundation
 
 @propertyWrapper
 public class Debounced<T> {
+    private let debouncer: Debouncer<T>
+    
+    public init(_ interval: TimeInterval,
+                on queue: DispatchQueue = .main) {
+        debouncer = Debouncer(interval, on: queue)
+    }
+    public func receive(_ value: T) {
+        debouncer.receive(value)
+    }
+    public func on(throttled: @escaping (T) -> ()) {
+        debouncer.on(throttled: throttled)
+    }
+    public var wrappedValue: T? {
+        get { debouncer.value }
+        set(v) { if let v = v { debouncer.receive(v) } }
+    }
+}
+
+public class Debouncer<T> {
     private(set) var value: T?
     private var valueTimestamp: Date = Date()
     private var interval: TimeInterval
@@ -44,10 +63,5 @@ public class Debounced<T> {
     }
     private func sendValue() {
         if let value = self.value { callbacks.forEach { $0(value) } }
-    }
-    
-    public var wrappedValue: T? {
-        get { value }
-        set(v) { if let v = v { receive(v) } }
     }
 }

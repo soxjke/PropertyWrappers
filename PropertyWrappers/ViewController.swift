@@ -21,13 +21,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
-        $searchTerm.on { (searchTerm) in
-            GithubAPI.search(term: searchTerm) { [weak self] result in
-                switch (result) {
-                case .success(let models): self?.onSuccess(models)
-                case .failure(let error): self?.onError(error)
-                }
-            }
+        $searchTerm.on { [weak self] (term) in
+            self?.searchGithub(term: term)
         }
     }
 }
@@ -55,6 +50,14 @@ extension ViewController {
         searchTerm = sender.text
         // alternatively:
         // $searchTerm.receive(sender.text ?? "")
+    }
+    private func searchGithub(term: String) {
+        GithubAPI.search(term: term) { [weak self] result in
+            switch (result) {
+            case .success(let models): self?.onSuccess(models)
+            case .failure(let error): self?.onError(error)
+            }
+        }
     }
     private func onSuccess(_ models: [GithubAPI.Response.Model]) {
         DispatchQueue.main.async {

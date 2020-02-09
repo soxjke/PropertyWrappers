@@ -10,6 +10,24 @@ import Foundation
 
 @propertyWrapper
 public class Throttled<T> {
+    private let throttler: Throttler<T>
+    
+    public init(_ interval: TimeInterval, on queue: DispatchQueue = .main) {
+        throttler = Throttler(interval, on: queue)
+    }
+    public func receive(_ value: T) {
+        throttler.receive(value)
+    }
+    public func on(throttled: @escaping (T) -> ()) {
+        throttler.on(throttled: throttled)
+    }
+    public var wrappedValue: T? {
+        get { throttler.value }
+        set(v) { if let v = v { throttler.receive(v) } }
+    }
+}
+
+public class Throttler<T> {
     private(set) var value: T? = nil
     private var valueTimestamp: Date? = nil
     private var interval: TimeInterval
@@ -40,10 +58,5 @@ public class Throttled<T> {
     }
     private func sendValue() {
         if let value = self.value { callbacks.forEach { $0(value) } }
-    }
-    
-    public var wrappedValue: T? {
-        get { value }
-        set(v) { if let v = v { receive(v) } }
     }
 }
