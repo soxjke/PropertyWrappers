@@ -8,22 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		4B08D61A23F06D1400A5CA7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08D61923F06D1400A5CA7D /* AppDelegate.swift */; };
-		4B08D61C23F06D1400A5CA7D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08D61B23F06D1400A5CA7D /* SceneDelegate.swift */; };
 		4B08D61E23F06D1400A5CA7D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08D61D23F06D1400A5CA7D /* ViewController.swift */; };
 		4B08D62123F06D1400A5CA7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B08D61F23F06D1400A5CA7D /* Main.storyboard */; };
 		4B08D62323F06D1500A5CA7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B08D62223F06D1500A5CA7D /* Assets.xcassets */; };
 		4B08D62623F06D1500A5CA7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B08D62423F06D1500A5CA7D /* LaunchScreen.storyboard */; };
+		4B08D62E23F06E0F00A5CA7D /* GithubRepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08D62D23F06E0F00A5CA7D /* GithubRepoCell.swift */; };
+		4B08D63023F06E9400A5CA7D /* GithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08D62F23F06E9400A5CA7D /* GithubAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4B08D61623F06D1400A5CA7D /* PropertyWrappers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropertyWrappers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B08D61923F06D1400A5CA7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4B08D61B23F06D1400A5CA7D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4B08D61D23F06D1400A5CA7D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4B08D62023F06D1400A5CA7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4B08D62223F06D1500A5CA7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4B08D62523F06D1500A5CA7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4B08D62723F06D1500A5CA7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B08D62D23F06E0F00A5CA7D /* GithubRepoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepoCell.swift; sourceTree = "<group>"; };
+		4B08D62F23F06E9400A5CA7D /* GithubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPI.swift; sourceTree = "<group>"; };
+		4B08D63123F07B1E00A5CA7D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4B08D63223F07B1E00A5CA7D /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +44,8 @@
 		4B08D60D23F06D1400A5CA7D = {
 			isa = PBXGroup;
 			children = (
+				4B08D63223F07B1E00A5CA7D /* LICENSE */,
+				4B08D63123F07B1E00A5CA7D /* README.md */,
 				4B08D61823F06D1400A5CA7D /* PropertyWrappers */,
 				4B08D61723F06D1400A5CA7D /* Products */,
 			);
@@ -57,8 +63,9 @@
 			isa = PBXGroup;
 			children = (
 				4B08D61923F06D1400A5CA7D /* AppDelegate.swift */,
-				4B08D61B23F06D1400A5CA7D /* SceneDelegate.swift */,
 				4B08D61D23F06D1400A5CA7D /* ViewController.swift */,
+				4B08D62D23F06E0F00A5CA7D /* GithubRepoCell.swift */,
+				4B08D62F23F06E9400A5CA7D /* GithubAPI.swift */,
 				4B08D61F23F06D1400A5CA7D /* Main.storyboard */,
 				4B08D62223F06D1500A5CA7D /* Assets.xcassets */,
 				4B08D62423F06D1500A5CA7D /* LaunchScreen.storyboard */,
@@ -138,9 +145,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B08D62E23F06E0F00A5CA7D /* GithubRepoCell.swift in Sources */,
+				4B08D63023F06E9400A5CA7D /* GithubAPI.swift in Sources */,
 				4B08D61E23F06D1400A5CA7D /* ViewController.swift in Sources */,
 				4B08D61A23F06D1400A5CA7D /* AppDelegate.swift in Sources */,
-				4B08D61C23F06D1400A5CA7D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +294,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PropertyWrappers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,6 +312,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PropertyWrappers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
